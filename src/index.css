@@ -1,0 +1,16 @@
+/* Apply CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Reset body styles */
+body {
+    overflow: hidden;
+}
+
+/* Optionally reset HTML and root styles */
+html, root {
+    overflow: hidden;
+}
