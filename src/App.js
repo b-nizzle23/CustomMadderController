@@ -13,10 +13,6 @@ function App() {
 
     const [joystickCenter, setJoystickCenter] = useState({x: 0, y: 0});
     const joystickCenterRef = useRef(joystickCenter);
-    const [circleCenter, setCircleCenter] = useState({x: 0, y: 0});
-    const circleCenterRef = useRef(circleCenter);
-    const [triangleCenter, setTriangleCenter] = useState({x: 0, y: 0});
-    const triangleCenterRef = useRef(triangleCenter);
     const [homeCenter, setHomeCenter] = useState({x: 0, y: 0});
     const homeCenterRef = useRef(homeCenter);
     const [plusCenter, setPlusCenter] = useState({x: 0, y: 0});
@@ -24,10 +20,6 @@ function App() {
 
     const [joystickState, setJoystickState] = useState({x: 0, y: 0, id: null});
     const joystickStateRef = useRef(joystickState);
-    const [circleState, setCircleState] = useState(null);
-    const circleStateRef = useRef(circleState);
-    const [triangleState, setTriangleState] = useState(null);
-    const triangleStateRef = useRef(triangleState);
     const [homeState, setHomeState] = useState(null);
     const homeStateRef = useRef(homeState);
     const [plusState, setPlusState] = useState(null);
@@ -96,23 +88,17 @@ function App() {
                 x: joystickState.x,
                 y: joystickState.y,
             },
-            circle: circleState !== null,
-            triangle: triangleState !== null,
             button: buttonState !== null,
             plus: plusState !== null,
         }
         sendMessageToParent(JSON.stringify({name: 'controller-state', state: JSON.stringify(controllerState)}));
-    }, [joystickState, circleState, triangleState, plusState, buttonState]);
+    }, [joystickState, plusState, buttonState]);
 
     const setCenters = () => {
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
         setJoystickCenter({x: 200, y: screenHeight - 195});
         joystickCenterRef.current = {x: 200, y: screenHeight - 195};
-        setCircleCenter({x: screenWidth - 266, y: screenHeight - 129});
-        circleCenterRef.current = {x: screenWidth - 266, y: screenHeight - 129};
-        setTriangleCenter({x: screenWidth - 134, y: screenHeight - 261});
-        triangleCenterRef.current = {x: screenWidth - 134, y: screenHeight - 261};
         setHomeCenter({x: screenWidth / 2, y: screenHeight - 227.27});
         homeCenterRef.current = {x: screenWidth / 2, y: screenHeight - 227.27};
         setPlusCenter({x: screenWidth / 2, y: screenHeight - 163.09});
@@ -132,13 +118,7 @@ function App() {
                 sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
             }
         }
-        if (circleStateRef.current === null) {
-            if (Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) <= 71) {
-                setCircleState(pointerId);
-                circleStateRef.current = pointerId;
-                sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
-            }
-        }
+        
         // new button stuffs
         if (buttonStateRef.current === null) {
             if (Math.sqrt(Math.pow(clientX - buttonCenterRef.current.x, 2) + Math.pow(clientY - buttonCenterRef.current.y, 2)) <= 71) {
@@ -147,13 +127,7 @@ function App() {
                 sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
             }
         }
-        if (triangleStateRef.current === null) {
-            if (Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) <= 71) {
-                setTriangleState(pointerId);
-                triangleStateRef.current = pointerId;
-                sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
-            }
-        }
+        
         if (homeStateRef.current === null) {
             if (Math.sqrt(Math.pow(clientX - homeCenterRef.current.x, 2) + Math.pow(clientY - homeCenterRef.current.y, 2)) <= 23) {
                 setHomeState(pointerId);
@@ -184,14 +158,6 @@ function App() {
             joystickStateRef.current = {x: newX, y: newY, id: pointerId};
         }
         else {
-            if (circleStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) > 71) {
-                setCircleState(null);
-                circleStateRef.current = null;
-            } else if (circleStateRef.current === null && Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) <= 71) {
-                setCircleState(pointerId);
-                circleStateRef.current = pointerId;
-                sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
-            }
             // new button stuffs
             if (buttonStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - buttonCenterRef.current.x, 2) + Math.pow(clientY - buttonCenterRef.current.y, 2)) > 71) {
                 setButtonState(null);
@@ -202,14 +168,7 @@ function App() {
                 sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
             }
 
-            if (triangleStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) > 71) {
-                setTriangleState(null);
-                triangleStateRef.current = null;
-            } else if (triangleStateRef.current === null && Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) <= 71) {
-                setTriangleState(pointerId);
-                triangleStateRef.current = pointerId;
-                sendMessageToParent(JSON.stringify({name: 'haptic', type: 'medium'}));
-            }
+            
             if (homeStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - homeCenterRef.current.x, 2) + Math.pow(clientY - homeCenterRef.current.y, 2)) > 23) {
                 setHomeState(null);
                 homeStateRef.current = null;
@@ -236,18 +195,10 @@ function App() {
             setJoystickState({x: 0, y: 0, id: null});
             joystickStateRef.current = {x: 0, y: 0, id: null};
         }
-        if (circleStateRef.current === pointerId) {
-            setCircleState(null);
-            circleStateRef.current = null;
-        }
         // new button
         if (buttonStateRef.current === pointerId) {
             setButtonState(null);
             buttonStateRef.current = null;
-        }
-        if (triangleStateRef.current === pointerId) {
-            setTriangleState(null);
-            triangleStateRef.current = null;
         }
         if (homeStateRef.current === pointerId) {
             sendMessageToParent(JSON.stringify({name: 'exit-confirmation'}));
