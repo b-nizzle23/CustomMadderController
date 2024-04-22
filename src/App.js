@@ -272,7 +272,7 @@ function App() {
                             width: 110,
                             height: 110,
                             borderRadius: 110,
-                            backgroundColor: '#BB3D3D',
+                            backgroundColor: '#1C5EAC',
                             boxShadow: '1px 0px 1px 0px #FFF inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset',
                         }}
                     >
@@ -338,7 +338,6 @@ function App() {
                         marginTop: 26,
                     }}
                 >
-                    <img src={'./assets/logo.svg'} alt={'logo'} style={{width: 63, height: 32}} />
                 </Box>
                 <Box
                     style={{
@@ -363,6 +362,7 @@ function App() {
                             boxShadow: homeState !== null ? '1px 0px 1px 0px #FFF inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset' : '-1px 0px 1px 0px #FFF inset, 1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset',
                         }}
                     >
+                        <img src={'./assets/home.svg'} alt={'home'} style={{width: 24, height: 22}} />
                     </Box>
                     <Box
                         style={{
@@ -414,7 +414,7 @@ function App() {
                     {/* Content for the single button */}
                     <button
                         style={{
-                            backgroundColor: 'rgb(187, 61, 61)',
+                            backgroundColor: '#1C5EAC',
                             height: '100%',
                             width: '100%',
                             borderRadius: '100%',

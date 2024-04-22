@@ -15024,7 +15024,7 @@ Please use another name.` );
 	      width: 110,
 	      height: 110,
 	      borderRadius: 110,
-	      backgroundColor: '#BB3D3D',
+	      backgroundColor: '#1C5EAC',
 	      boxShadow: '1px 0px 1px 0px #FFF inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset'
 	    }
 	  }, /*#__PURE__*/React.createElement(Box$1, {
@@ -15079,14 +15079,7 @@ Please use another name.` );
 	      alignItems: 'center',
 	      marginTop: 26
 	    }
-	  }, /*#__PURE__*/React.createElement("img", {
-	    src: './assets/logo.svg',
-	    alt: 'logo',
-	    style: {
-	      width: 63,
-	      height: 32
-	    }
-	  })), /*#__PURE__*/React.createElement(Box$1, {
+	  }), /*#__PURE__*/React.createElement(Box$1, {
 	    style: {
 	      display: 'flex',
 	      flexDirection: 'column',
@@ -15169,7 +15162,7 @@ Please use another name.` );
 	    }
 	  }, /*#__PURE__*/React.createElement("button", {
 	    style: {
-	      backgroundColor: 'rgb(187, 61, 61)',
+	      backgroundColor: '#1C5EAC',
 	      height: '100%',
 	      width: '100%',
 	      borderRadius: '100%'
