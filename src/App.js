@@ -363,7 +363,6 @@ function App() {
                             boxShadow: homeState !== null ? '1px 0px 1px 0px #FFF inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset' : '-1px 0px 1px 0px #FFF inset, 1px 0px 1px 0px rgba(0, 0, 0, 0.35) inset',
                         }}
                     >
-                        <img src={'./assets/home.svg'} alt={'home'} style={{width: 24, height: 22}} />
                     </Box>
                     <Box
                         style={{

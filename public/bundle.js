@@ -14690,16 +14690,6 @@ Please use another name.` );
 	    y: 0
 	  });
 	  const joystickCenterRef = reactExports.useRef(joystickCenter);
-	  const [circleCenter, setCircleCenter] = reactExports.useState({
-	    x: 0,
-	    y: 0
-	  });
-	  const circleCenterRef = reactExports.useRef(circleCenter);
-	  const [triangleCenter, setTriangleCenter] = reactExports.useState({
-	    x: 0,
-	    y: 0
-	  });
-	  const triangleCenterRef = reactExports.useRef(triangleCenter);
 	  const [homeCenter, setHomeCenter] = reactExports.useState({
 	    x: 0,
 	    y: 0
@@ -14716,10 +14706,6 @@ Please use another name.` );
 	    id: null
 	  });
 	  const joystickStateRef = reactExports.useRef(joystickState);
-	  const [circleState, setCircleState] = reactExports.useState(null);
-	  const circleStateRef = reactExports.useRef(circleState);
-	  const [triangleState, setTriangleState] = reactExports.useState(null);
-	  const triangleStateRef = reactExports.useRef(triangleState);
 	  const [homeState, setHomeState] = reactExports.useState(null);
 	  const homeStateRef = reactExports.useRef(homeState);
 	  const [plusState, setPlusState] = reactExports.useState(null);
@@ -14784,8 +14770,6 @@ Please use another name.` );
 	        x: joystickState.x,
 	        y: joystickState.y
 	      },
-	      circle: circleState !== null,
-	      triangle: triangleState !== null,
 	      button: buttonState !== null,
 	      plus: plusState !== null
 	    };
@@ -14793,7 +14777,7 @@ Please use another name.` );
 	      name: 'controller-state',
 	      state: JSON.stringify(controllerState)
 	    }));
-	  }, [joystickState, circleState, triangleState, plusState, buttonState]);
+	  }, [joystickState, plusState, buttonState]);
 	  const setCenters = () => {
 	    const screenWidth = window.innerWidth;
 	    const screenHeight = window.innerHeight;
@@ -14804,22 +14788,6 @@ Please use another name.` );
 	    joystickCenterRef.current = {
 	      x: 200,
 	      y: screenHeight - 195
-	    };
-	    setCircleCenter({
-	      x: screenWidth - 266,
-	      y: screenHeight - 129
-	    });
-	    circleCenterRef.current = {
-	      x: screenWidth - 266,
-	      y: screenHeight - 129
-	    };
-	    setTriangleCenter({
-	      x: screenWidth - 134,
-	      y: screenHeight - 261
-	    });
-	    triangleCenterRef.current = {
-	      x: screenWidth - 134,
-	      y: screenHeight - 261
 	    };
 	    setHomeCenter({
 	      x: screenWidth / 2,
@@ -14871,31 +14839,12 @@ Please use another name.` );
 	        }));
 	      }
 	    }
-	    if (circleStateRef.current === null) {
-	      if (Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) <= 71) {
-	        setCircleState(pointerId);
-	        circleStateRef.current = pointerId;
-	        sendMessageToParent(JSON.stringify({
-	          name: 'haptic',
-	          type: 'medium'
-	        }));
-	      }
-	    }
+
 	    // new button stuffs
 	    if (buttonStateRef.current === null) {
 	      if (Math.sqrt(Math.pow(clientX - buttonCenterRef.current.x, 2) + Math.pow(clientY - buttonCenterRef.current.y, 2)) <= 71) {
 	        setButtonState(pointerId);
 	        buttonStateRef.current = pointerId;
-	        sendMessageToParent(JSON.stringify({
-	          name: 'haptic',
-	          type: 'medium'
-	        }));
-	      }
-	    }
-	    if (triangleStateRef.current === null) {
-	      if (Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) <= 71) {
-	        setTriangleState(pointerId);
-	        triangleStateRef.current = pointerId;
 	        sendMessageToParent(JSON.stringify({
 	          name: 'haptic',
 	          type: 'medium'
@@ -14948,17 +14897,6 @@ Please use another name.` );
 	        id: pointerId
 	      };
 	    } else {
-	      if (circleStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) > 71) {
-	        setCircleState(null);
-	        circleStateRef.current = null;
-	      } else if (circleStateRef.current === null && Math.sqrt(Math.pow(clientX - circleCenterRef.current.x, 2) + Math.pow(clientY - circleCenterRef.current.y, 2)) <= 71) {
-	        setCircleState(pointerId);
-	        circleStateRef.current = pointerId;
-	        sendMessageToParent(JSON.stringify({
-	          name: 'haptic',
-	          type: 'medium'
-	        }));
-	      }
 	      // new button stuffs
 	      if (buttonStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - buttonCenterRef.current.x, 2) + Math.pow(clientY - buttonCenterRef.current.y, 2)) > 71) {
 	        setButtonState(null);
@@ -14966,17 +14904,6 @@ Please use another name.` );
 	      } else if (buttonStateRef.current === null && Math.sqrt(Math.pow(clientX - buttonCenterRef.current.x, 2) + Math.pow(clientY - buttonCenterRef.current.y, 2)) <= 71) {
 	        setButtonState(pointerId);
 	        buttonStateRef.current = pointerId;
-	        sendMessageToParent(JSON.stringify({
-	          name: 'haptic',
-	          type: 'medium'
-	        }));
-	      }
-	      if (triangleStateRef.current === pointerId && Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) > 71) {
-	        setTriangleState(null);
-	        triangleStateRef.current = null;
-	      } else if (triangleStateRef.current === null && Math.sqrt(Math.pow(clientX - triangleCenterRef.current.x, 2) + Math.pow(clientY - triangleCenterRef.current.y, 2)) <= 71) {
-	        setTriangleState(pointerId);
-	        triangleStateRef.current = pointerId;
 	        sendMessageToParent(JSON.stringify({
 	          name: 'haptic',
 	          type: 'medium'
@@ -15023,18 +14950,10 @@ Please use another name.` );
 	        id: null
 	      };
 	    }
-	    if (circleStateRef.current === pointerId) {
-	      setCircleState(null);
-	      circleStateRef.current = null;
-	    }
 	    // new button
 	    if (buttonStateRef.current === pointerId) {
 	      setButtonState(null);
 	      buttonStateRef.current = null;
-	    }
-	    if (triangleStateRef.current === pointerId) {
-	      setTriangleState(null);
-	      triangleStateRef.current = null;
 	    }
 	    if (homeStateRef.current === pointerId) {
 	      sendMessageToParent(JSON.stringify({
